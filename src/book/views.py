@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.http import Http404
 
 from .models import Author
 from .models import Book
@@ -39,3 +40,20 @@ class BookListView(generic.ListView):
         context['my_book_list'] = Book.objects.all()
 
         return context
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = "book/book_detail.html"
+
+
+'''
+def book_detail_view(request, pk):
+    try:
+        book_id = Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+        raise Http404('Book does not exist.')
+    #book_id = get.object_or_404(Book, pk = pk)
+
+    return render(request, 'book/book_detail.html', context={'book': book_id})
+'''
