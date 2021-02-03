@@ -8,9 +8,10 @@ from .models import Genre
 
 
 def index(request):
-    num_books = Book.object.all().count()
-    num_instances = BookInstance.objects.all().count
-    num_instances_available = BookInstance.objects.filter(status__exact='a')
+    num_books = Book.objects.all().count()
+    num_instances = BookInstance.objects.all().count()
+    num_instances_available = BookInstance.objects.filter(
+        status__exact='a').count()
     num_author = Author.objects.count()
 
     context = {
