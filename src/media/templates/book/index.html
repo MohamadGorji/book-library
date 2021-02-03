@@ -5,11 +5,25 @@
 {% endblock title %}
 
 {% block body %}
-    <p>Number of books:{{num_books}}</p>
-    <br>
-    <p>Number of instances:{{num_instances}}</p>
-    <br>
-    <p>Number of available instances:{{num_instances_available}}</p>
-    <br>
-    <p>Number of authors:{{num_author}}</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 left-div">
+      <div class="starter-template">
+        <h1>Local Library Home</h1>
+        <p class="lead">Welcome to LocalLibrary</p>
+        <hr>
+        <p>Number of books:{{num_books}}</p>
+        <br>
+        <p>Number of instances:{{num_instances}}</p>
+        <br>
+        <p>Number of available instances:{{num_instances_available}}</p>
+        <br>
+        <p>Number of authors:{{num_author}}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {% include "../partial/carousel.html" %}
+    </div>
+  </div>
+</div>
 {% endblock body %}
