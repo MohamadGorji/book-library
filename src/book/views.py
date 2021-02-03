@@ -27,3 +27,5 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
     template_name = "book_list.html"
+    context_object_name = "book_list"
+    #query = Book.objects.filter(title__icontains='django')[:5]
