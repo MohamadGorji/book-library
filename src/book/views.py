@@ -26,6 +26,16 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
-    template_name = "book_list.html"
-    context_object_name = "book_list"
+    #template_name = "book_list.html"
+    #context_object_name = "book_list"
     #query = Book.objects.filter(title__icontains='django')[:5]
+
+    def get_queryset(self):
+        return Book.objects.filter(title__icontains='farm')[:5]
+
+    def get_context_data(self, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)
+
+        context['my_book_list'] = Book.objects.all()
+
+        return context

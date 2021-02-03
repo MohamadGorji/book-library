@@ -1,7 +1,15 @@
 {% for book in book_list%}
     {{ book.title }}
-    <br><br>
+    <br>hello<br>
     {{ book.summary}}
+    <hr>
+    <br><br>
+{% endfor %}
+
+{% for b in my_book_list%}
+    {{ b.title }}
+    <br><br>
+    {{ b.summary}}
     <hr>
     <br><br>
 {% endfor %}
