@@ -1,0 +1,23 @@
+{% extends '../shared/main.html' %}
+{% block body %}
+
+<div class="container">
+  <div style="margin-top 50px;"></div>
+  <div style="margin-bottom: 100px;"></div>
+  <section class="borrowed" style="background-color:#2c3e50; border-radius:5px; padding: 20px; color:#fff;">
+    <h1 class="text-center text-white">Borrowed Books</h1>
+    {% if bookinstance_list %}
+      <ul>
+        {% for bookinst in bookinstance_list %}
+          <li class="{% if bookinst.is_overdue %} text-danger {% else %} text-white {% endif %}"></li>
+          <a class="logout-link" href="{% url 'book:bookDetail' bookinst.book.pk %}">{{ bookinst.book.title}}</a> <span>({{ bookinst.due_back }})</span>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-class text-white">There are no books borrowed.</p>
+    {% endif %}  
+  </section>
+</div>
+{% endblock body %}
+
+
