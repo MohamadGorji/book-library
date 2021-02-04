@@ -70,3 +70,12 @@ def book_detail_view(request, pk):
 
     return render(request, 'book/book_detail.html', context={'book': book_id})
 '''
+
+
+class LoanedBookByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'book/bookinstance_list_borrower_user.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
