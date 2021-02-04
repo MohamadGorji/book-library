@@ -27,10 +27,12 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 5
     #template_name = "book_list.html"
     #context_object_name = "book_list"
     #query = Book.objects.filter(title__icontains='django')[:5]
 
+    '''
     def get_queryset(self):
         return Book.objects.filter(title__icontains='farm')[:5]
 
@@ -40,6 +42,7 @@ class BookListView(generic.ListView):
         context['my_book_list'] = Book.objects.all()
 
         return context
+    '''
 
 
 class BookDetailView(generic.DetailView):
