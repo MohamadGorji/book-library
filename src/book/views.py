@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Author
 from .models import Book
@@ -9,6 +11,7 @@ from .models import Genre
 # Create your views here.
 
 
+@login_required
 def index(request):
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
@@ -25,9 +28,13 @@ def index(request):
     return render(request, 'book/index.html', context)
 
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     paginate_by = 5
+
+    login_url = 'accounts/login/'
+    redirect_fiels_name = ''
+
     #template_name = "book_list.html"
     #context_object_name = "book_list"
     #query = Book.objects.filter(title__icontains='django')[:5]
@@ -45,9 +52,12 @@ class BookListView(generic.ListView):
     '''
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     template_name = "book/book_detail.html"
+
+    login_url = 'accounts/login/'
+    redirect_fiels_name = ''
 
 
 '''
