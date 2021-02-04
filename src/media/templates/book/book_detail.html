@@ -1,0 +1,61 @@
+{% extends "../shared/main.html" %}
+
+{% block title %}
+    {{ super }} Book | Detail
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 left-div">
+      <div class="starter-template">
+        <h1>Books Detail</h1>
+        <hr>
+        <ul class="list-unstyled">
+            <li>
+                <p><strong>Title: </strong>{{ book.title }}</p>
+            </li>
+            <li>
+                <p><strong>Summary: </strong>{{ book.summary }}</p>
+            </li>
+            <li>
+                <p><strong>ISBN: </strong>{{ book.isbn }}</p>
+            </li>
+            <li>
+                <p>
+                    <strong>Instances: </strong>
+                    <br>
+                    <ul>
+                        {% for copy in book.bookinstance_set.all %}
+                            <li><p><strong>Status: </strong>{{ copy.status }}</p></li>
+                            <li><p><strong>Imprint: </strong>{{ copy.imprint }}</p></li>
+                            <li><p><strong>ID: </strong>{{ copy.id }}</p></li>
+                            {% if copy.status == 'o' %}
+                                <li><p><strong>Due Back: </strong>{{ copy.due_back }}</p></li>
+                            {% endif %}
+                            <br>
+                        {% endfor %}
+                    </ul>
+                </p>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {% include "../partial/carousel.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+
+
+
+<h3>Title: {{ book.title }}</h3>
+<p>ISBN: {{ book.isbn }}</p>
+<hr>
+<p>Summary</p>
+<br>
+{{ book.summary }}
+<br>
+
