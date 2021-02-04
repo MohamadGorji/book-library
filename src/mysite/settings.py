@@ -25,7 +25,7 @@ SECRET_KEY = '!mj#npln1848moy)j-9f=ewh9y$5@ai__#@#o1zmhz*4xjcm3('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/book'
 
 ALLOWED_HOSTS = []
 
