@@ -1,3 +1,52 @@
+{% extends '../shared/' %}
+{% block body %}
+  <div class="container">
+    <div style="margin-top: 50px;"></div>
+      <h1 class="text-center">
+        All Books
+      </h1>
+    </div>
+  <div style="margin-bottom: 100px;"></div>
+
+{% if book_list %}
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="Title">#</th>
+            <th scope="ISBN">#</th>
+            <th scope="Detail">#</th>
+          </tr>
+        </thead> 
+        <tbody>
+        {% for book in book_list %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.isbn }}</td>
+            <td><a class="btn btn-info btn-block" href="{% url 'book:bookDetail' book.id %}">info</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include 'partials/pagination.html' %}
+
+{% else %}
+    <h1>Not found!</h1>
+{% endif %}
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
 {% for book in book_list%}
     {{ book.title }}
     <br>hello<br>
