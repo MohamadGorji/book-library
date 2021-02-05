@@ -36,7 +36,7 @@ class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     paginate_by = 5
 
-    login_url = 'accounts/login/'
+    #login_url = 'accounts/login/'
     redirect_fiels_name = ''
 
     #template_name = "book_list.html"
