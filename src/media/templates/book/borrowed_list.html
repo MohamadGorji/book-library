@@ -10,7 +10,7 @@
       <ul>
         {% for bookinst in bookinstance_list %}
           <li class="{% if bookinst.is_overdue %} text-danger {% else %} text-white {% endif %}">
-            <a class="logout-link" href="{% url 'book:renewBookLibrarian' bookinst.uuid %}">({{ bookinst.due_back }})</a> <span> - {{ bookinst.book.title}} - {{ bookinst.borrower }}</span>
+            <a class="logout-link" href="{% url 'book:renewBookLibrarian' bookinst.id %}">({{ bookinst.due_back }})</a> <span> - {{ bookinst.book.title}} - {{ bookinst.borrower }}</span>
           </li>
         {% endfor %}
       </ul>
