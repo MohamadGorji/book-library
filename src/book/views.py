@@ -3,9 +3,9 @@ from django.views import generic
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from book.forms import RenewBookForm
 
 from .models import Author
@@ -107,10 +107,10 @@ def renew_book_librarian(request, pk):
             book_instance.due_back = form.cleaned_data['renewal_date']
             book_instance.save()
 
-            return HttpResponseRedirect(reverse('borrowedList'))
+            return HttpResponseRedirect(reverse_lazy('book:allBorrowed'))
 
     else:
-        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        proposed_renewal_date = date.today() + timedelta(weeks=3)
         form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
 
     context = {
