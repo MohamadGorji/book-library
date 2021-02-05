@@ -67,6 +67,9 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
+        permissions = (
+            ("librarian", "librarian"),
+        )
 
     def __str__(self):
         return '{0} ({1})'.format(self.id, self.book.title)
