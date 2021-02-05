@@ -34,16 +34,16 @@ def index(request):
 
 class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
-    paginate_by = 5
+    paginate_by = 3
 
-    #login_url = 'accounts/login/'
     redirect_fiels_name = ''
 
+    '''
+    #login_url = 'accounts/login/'
     #template_name = "book_list.html"
     #context_object_name = "book_list"
     #query = Book.objects.filter(title__icontains='django')[:5]
 
-    '''
     def get_queryset(self):
         return Book.objects.filter(title__icontains='farm')[:5]
 

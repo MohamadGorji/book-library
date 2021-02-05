@@ -5,10 +5,6 @@
           <li>
             <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a>
           </li>
-        {% else %}
-          <li  class="page-item disabled" >
-            <a href="page-link" href="#"><i class="fa fa-chevron-left"></i></a>
-          </li>
         {% endif %}
 
         {% for i in paginator.page_range %}
@@ -26,10 +22,6 @@
         {% if page_obj.has_next %}
           <li>
             <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right"></i></a>
-          </li>
-        {% else %}
-          <li  class="page-item disabled" >
-            <a href="page-link" href="#"><i class="fa fa-chevron-right"></i></a>
           </li>
         {% endif %}
 
