@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import Http404, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 
@@ -94,8 +94,8 @@ class LoanedBookByUserListView(LoginRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
 
 
-# @login_required
-# @permission_required('book.librarian')
+@login_required
+@permission_required('book.librarian')
 def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
