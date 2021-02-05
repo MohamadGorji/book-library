@@ -1,44 +1,22 @@
 {% extends '../shared/main.html' %}
-{% block title %}
-    {{ super }}| Book | Borrowed
-{% endblock title %}
 {% block body %}
-  <div class="container">
-    <div style="margin-top: 50px;"></div>
-      <h1 class="text-center">
-        All Borrowed Books
-      </h1>
-    </div>
+
+<div class="container">
+  <div style="margin-top 50px;"></div>
   <div style="margin-bottom: 100px;"></div>
-
-{% if book_list %}
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">ISBN</th>
-            <th scope="col">Detail</th>
-            <th scope="col">Renewal</th>
-          </tr>
-        </thead> 
-        <tbody>
-        {% for book in book_list %}
-          <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ book.title }}</td>
-            <td>{{ book.isbn }}</td>
-            <td><a class="btn btn-info btn-block" href="{% url 'book:bookDetail' book.id %}">info</a></td>
-            <td><a class="btn btn-info btn-block" href="{% url 'book:renew-book-librarian' book.uuid %}">Renewal</a></td>
-          </tr>
+  <section class="borrowed" style="background-color:#2c3e50; border-radius:5px; padding: 20px; color:#fff;">
+    <h1 class="text-center text-white">Borrowed Books</h1>
+    {% if bookinstance_list %}
+      <ul>
+        {% for bookinst in bookinstance_list %}
+          <li class="{% if bookinst.is_overdue %} text-danger {% else %} text-white {% endif %}">
+            <a class="logout-link" href="{% url 'book:renewBookLibrarian' bookinst.uuid %}">({{ bookinst.due_back }})</a> <span> - {{ bookinst.book.title}} - {{ bookinst.borrower }}</span>
+          </li>
         {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% include '../partial/pagination.html' %}
-
-{% else %}
-    <h1>Not found!</h1>
-{% endif %}
+      </ul>
+    {% else %}
+      <p class="text-class text-white">There are no books borrowed.</p>
+    {% endif %}  
+  </section>
+</div>
 {% endblock body %}
