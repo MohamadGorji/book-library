@@ -69,11 +69,11 @@ class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     template_name = "book/book_detail.html"
 
-    login_url = 'accounts/login/'
     redirect_fiels_name = ''
 
 
 '''
+    login_url = 'accounts/login/'
 def book_detail_view(request, pk):
     try:
         book_id = Book.objects.get(pk=pk)
