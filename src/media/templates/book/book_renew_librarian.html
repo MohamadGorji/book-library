@@ -1,0 +1,30 @@
+{% extends "../shared/main.html" %}
+{% block body %}
+  <div class="container">
+    <div style="margin-top 50px;"></div>
+      <h1 class="text-center">
+        All Books
+      </h1>
+    <div style="margin-bottom: 100px;"></div>
+
+    {% if form.errors %}
+      {% for error, message in form.errors.items %}
+        <div class="alert alert-danger">{{error}} {{message}}</div>
+      {% endfor %}
+    {% endif %}
+    <section class="borrowed" style="background-color:#2c3e50; border-radius:5px; padding: 20px; color:#fff;">
+    <h1>Renew: {{ book_instance.book.title }}</h1>
+    <p>Borrower: {{ book_instance.borrower }}</p>
+    <p{% if book_instance.is_overdue %} class="text-danger"{% endif %}>Due date: {{ book_instance.due_back }}</p>
+        <form method="post">
+          {% csrf_token %}
+            <div>
+              <label for="renewal_date">{{ form.renewal_date.label }}</label>
+              {{ form.renewal_date }}
+            </div>
+          <input class="btn btn-info" type="submit" value="Submit">
+        </form>
+    </section>
+  </div>
+{% endblock body %}
+
