@@ -56,6 +56,15 @@ class BookListView(LoginRequiredMixin, generic.ListView):
     '''
 
 
+class BorrowedListView(LoginRequiredMixin, generic.ListView):
+    model = Book
+    paginate_by = 5
+    template_name = "book/borrowed_list.html"
+
+    login_url = 'accounts/login/'
+    redirect_fiels_name = ''
+
+
 class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     template_name = "book/book_detail.html"
@@ -85,8 +94,8 @@ class LoanedBookByUserListView(LoginRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
 
 
-@login_required
-@permission_required('book.librarian')
+# @login_required
+# @permission_required('book.librarian')
 def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path('list', views.BookListView.as_view(), name='bookList'),
     path('detail/<int:pk>', views.BookDetailView.as_view(), name='bookDetail'),
     path('mybooks/', views.LoanedBookByUserListView.as_view(), name='myBooks'),
-    path('book/<uuid:pk>/renew/', views.renew_book_librarian,
+    path('renew/<uuid:sk>/', views.renew_book_librarian,
          name='renew-book-librarian'),
+    path('borrowed', views.BorrowedListView.as_view(), name='borrowedList'),
 ]
