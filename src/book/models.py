@@ -42,8 +42,9 @@ class Author(models.Model):
 
 
 class BookInstance(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4,
+    uuid = models.UUIDField(default=str(uuid.uuid4),
                             help_text='Unique ID for this particular book across whole library')
+    uuids = models.CharField(max_length=200)
     id = models.AutoField(primary_key=True)
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprint = models.CharField(max_length=200)

@@ -56,13 +56,13 @@ class BookListView(LoginRequiredMixin, generic.ListView):
     '''
 
 
-class BorrowedListView(LoginRequiredMixin, generic.ListView):
-    model = Book
+class LoanedBookListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'book/borrowed_list.html'
     paginate_by = 5
-    template_name = "book/borrowed_list.html"
 
-    login_url = 'accounts/login/'
-    redirect_fiels_name = ''
+    def get_queryset(self):
+        return BookInstance.objects.filter(status__exact='o').order_by('due_back')
 
 
 class BookDetailView(LoginRequiredMixin, generic.DetailView):
@@ -107,7 +107,7 @@ def renew_book_librarian(request, pk):
             book_instance.due_back = form.cleaned_data['renewal_date']
             book_instance.save()
 
-            return HttpResponseRedirect(reverse('all-borrowed'))
+            return HttpResponseRedirect(reverse('borrowedList'))
 
     else:
         proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
